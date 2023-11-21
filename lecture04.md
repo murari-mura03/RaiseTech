@@ -6,12 +6,12 @@
 
 #### EC2作成
 ---
-![ec2](https://github.com/murari-mura03/RaizeTech/assets/150114064/e0376f3e-d9d8-4e1f-81d1-4621d0cca273)
+![ec2](https://github.com/murari-mura03/RaizeTech/assets/150114064/095f7cda-ebaf-48c9-8434-973c752c9fc2)
 
 #### EC2セキュリティグループ
 ---
 ![ec2-sg](https://github.com/murari-mura03/RaizeTech/assets/150114064/1857b559-45f5-44d9-b939-8a077ade8bb7)
-![ec2](https://github.com/murari-mura03/RaizeTech/assets/150114064/efe40493-c20f-4a8d-a27a-8f73fbaeee09)
+![ec2-sg-2](https://github.com/murari-mura03/RaizeTech/assets/150114064/73e0bb7c-5e07-42ea-bfdb-4ff6943edf6c)
 
 #### RDS作成
 ---
