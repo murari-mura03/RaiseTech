@@ -7,7 +7,6 @@
 - データベースの設定、MySQLの起動確認
 - RDSと接続
 - セキュリティグループにポート3000を追加
-- 
 ![スクリーンショット 2023-11-30 153834](https://github.com/murari-mura03/RaizeTech/assets/150114064/03653871-fd80-4849-99d1-8d9f68d29de3)
 
 2.Nginx+Unicornで起動
