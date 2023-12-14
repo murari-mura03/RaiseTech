@@ -26,6 +26,7 @@ https://calculator.aws/#/estimate?id=717f7e8c41bf73e391a8718fa9e033f56912c52c
 
 ## 現在の利用料
 ![cost](https://github.com/murari-mura03/RaizeTech/assets/150114064/f3103266-fd3d-465a-b963-464fcf18edd6)
+![スクリーンショット 2023-12-14 135516](https://github.com/murari-mura03/RaizeTech/assets/150114064/e119eb9f-d197-45b8-8c5f-a21d6f796f5a)
 - EC2インスタンスを何度も複数作成したためEBSの無料利用枠を超えてしまった。
 - ElasticIPをインスタンスにアタッチしないままにしていた時期があり料金が発生している。
 
