@@ -1,0 +1,67 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Security_Layer Template
+
+Resources:
+  lecture10sg:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: lecture10-sg
+      GroupName: lecture10-sg
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          SourceSecurityGroupId: !Ref SecurityGroupALB
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 14.10.35.32/32
+      Tags:
+        - Key: Name
+          Value: lecture10-sg
+      VpcId: !ImportValue NetworkLayer-lecture10
+  lecture10rdssg:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: lecture10-rds-sg
+      GroupName: lecture10-rds-sg
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 3306
+          ToPort: 3306
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: lecture10-rds-sg
+      VpcId: !ImportValue NetworkLayer-lecture10
+
+  SecurityGroupALB:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: SecurityGroupALB
+      GroupName: SecurityGroupALB
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: SecurityGroupALB
+      VpcId: !ImportValue NetworkLayer-lecture10
+
+Outputs:
+  lecture10sg:
+    Value: !Ref lecture10sg
+    Export:
+      Name: SecurityLayer-lecture10-sg
+
+  lecture10rdssg:
+    Value: !Ref lecture10rdssg
+    Export:
+      Name: SecurityLayer-lecture10rdssg
+
+  SecurityGroupALB:
+    Value: !Ref SecurityGroupALB
+    Export:
+      Name: SecurityLayer-SecurityGroupALB
