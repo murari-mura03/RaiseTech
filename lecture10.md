@@ -19,12 +19,13 @@
 
 #### SecurityGroup
 ![SecurityGroup](images10/SecurityGroups.png)
-EC2、RDS、ALB用に3つ作成
+- EC2、RDS、ALB用に3つ作成
 
 #### EC2
 ![EC2](images10/EC2.png)
 #### RDS
 ![RDS](images10/RDS.png)
+- パスワード保護のためSecretsManagerを使用。
 
 #### EC2からRDSへSSH接続確認
 ![EC2-RDS](images10/connection.png)
@@ -32,3 +33,5 @@ EC2、RDS、ALB用に3つ作成
 #### S3
 ![S3](images10/s3.png)
 
+#### 実際のテンプレート
+[CloudFormationTemplate](https://github.com/murari-mura03/RaizeTech/tree/b251fcb773272abd6ce57e084ac8793990aa4f55/CloudFormation "Template")
