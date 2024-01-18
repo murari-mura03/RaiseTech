@@ -10,6 +10,9 @@
 | Security_Layer                | EC2SecurityGroup<br>RDSSecurityGroup<br>ALBSecurityGroup                                               | 
 | Application_Layer | EC2<br>RDS<br>Secrets Managet<br>RDSSubnetGroup<br>ALB<br>ALBTargetGroup<br>ALBLisner<br>S3<br>IAMRole | 
 
+#### 実際のテンプレート
+[CloudFormationTemplate](https://github.com/murari-mura03/RaizeTech/tree/b251fcb773272abd6ce57e084ac8793990aa4f55/CloudFormation "Template")
+
 - リソース作成確認
 ![CloudFormation](images10/CloudFormation.png)
 
@@ -32,6 +35,3 @@
 
 #### S3
 ![S3](images10/s3.png)
-
-#### 実際のテンプレート
-[CloudFormationTemplate](https://github.com/murari-mura03/RaizeTech/tree/b251fcb773272abd6ce57e084ac8793990aa4f55/CloudFormation "Template")
