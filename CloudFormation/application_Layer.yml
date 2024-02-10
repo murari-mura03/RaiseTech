@@ -138,5 +138,4 @@ Resources:
             Action: "s3:*"
             Resource: !Sub "arn:aws:s3:::lecture10mura03s3/*"
             Principal:
-              AWS: !ImportValue EC2InstanceRoleExportArn
-              
+                AWS: !ImportValue EC2InstanceRoleExportArn
