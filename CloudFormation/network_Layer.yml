@@ -1,33 +1,33 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: Network_Layer Template
 
-Resources: 
-  lecture10:
+Resources:
+  Lecture10Vpc:
     Type: AWS::EC2::VPC
     Properties:
       CidrBlock: 10.0.0.0/16
       EnableDnsSupport: true
       Tags:
         - Key: Name
-          Value: lecture10
+          Value: Lecture10Vpc
 
-# MapPublicIpOnLaunch は AWS マネジメントコンソールにおける「パブリックIPv4アドレスの自動割り当てを有効にする」にチェックを入れるかどうかに相当
+# Subnet
   PublicSubnet1a:
     Type: AWS::EC2::Subnet
     Properties:
       AvailabilityZone: "ap-northeast-1a"
-      VpcId: !Ref lecture10
+      VpcId: !Ref Lecture10Vpc
       CidrBlock: 10.0.0.0/20
       MapPublicIpOnLaunch: true
       Tags:
         - Key: Name
-          Value: PublicSubnet1a
+          Value: PubricSubnet1a
   
   PrivateSubnet1a:
     Type: AWS::EC2::Subnet
     Properties:
       AvailabilityZone: "ap-northeast-1a"
-      VpcId: !Ref lecture10
+      VpcId: !Ref Lecture10Vpc
       CidrBlock: 10.0.128.20/20
       Tags:
         - Key: Name
@@ -37,7 +37,7 @@ Resources:
     Type: AWS::EC2::Subnet
     Properties:
       AvailabilityZone: "ap-northeast-1c"
-      VpcId: !Ref lecture10
+      VpcId: !Ref Lecture10Vpc
       CidrBlock: 10.0.16.0/20
       MapPublicIpOnLaunch: true
       Tags:
@@ -48,36 +48,36 @@ Resources:
     Type: AWS::EC2::Subnet
     Properties:
       AvailabilityZone: "ap-northeast-1c"
-      VpcId: !Ref lecture10
+      VpcId: !Ref Lecture10Vpc
       CidrBlock: 10.0.144.0/20
       Tags:
         - Key: Name
           Value: PrivateSubnet1c
 
 # InternetGatewayとRouteTableを作成
-  lecture10igw:
+  Lecture10Igw:
     Type: AWS::EC2::InternetGateway
     Properties:
       Tags:
         - Key: Name
-          Value: lecture10-igw
+          Value: Lecture10Igw
   AttachGateway:
     Type: AWS::EC2::VPCGatewayAttachment
     Properties:
-      VpcId: !Ref lecture10
-      InternetGatewayId: !Ref lecture10igw
+      VpcId: !Ref Lecture10Vpc
+      InternetGatewayId: !Ref Lecture10Igw
 
   PublicRouteTable:
     Type: AWS::EC2::RouteTable
     Properties:
-      VpcId: !Ref lecture10
+      VpcId: !Ref Lecture10Vpc
       Tags:
         - Key: Name
           Value: PublicRouteTable
   PrivateRouteTable:
     Type: AWS::EC2::RouteTable
     Properties:
-      VpcId: !Ref lecture10
+      VpcId: !Ref Lecture10Vpc
       Tags:
         - Key: Name
           Value: PrivateRouteTable
@@ -110,27 +110,26 @@ Resources:
       Properties:
         DestinationCidrBlock: 0.0.0.0/0
         RouteTableId: !Ref PublicRouteTable
-        GatewayId: !Ref lecture10igw
-
-# Outputs
+        GatewayId: !Ref Lecture10Igw
+  
 Outputs:
-  lecture10:
-    Value: !Ref lecture10
+  Lecture10Vpc:
+    Value: !Ref Lecture10Vpc
     Export:
-      Name: NetworkLayer-lecture10
+      Name: Lecture10VpcId
   PublicSubnet1a:
     Value: !Ref PublicSubnet1a
     Export:
-      Name: NetworkLayer-PublicSubnet1a
+      Name: PublicSubnet1aId
   PublicSubnet1c:
     Value: !Ref PublicSubnet1c
     Export:
-      Name: NetworkLayer-PublicSubnet1c
+      Name: PublicSubnet1cId
   PrivateSubnet1a:
     Value: !Ref PrivateSubnet1a
     Export:
-      Name: NetworkLayer-PrivateSubnet1a
+      Name: PrivateSubnet1aId
   PrivateSubnet1c:
     Value: !Ref PrivateSubnet1c
     Export:
-      Name: NetworkLayer-PrivateSubnet1c
+      Name: PrivateSubnet1cId

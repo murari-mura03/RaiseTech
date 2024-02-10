@@ -9,8 +9,6 @@ Parameters:
       - t2.micro
       - m1.small
       - m1.large
-  DBInstanceIdentifier:
-    Type: String
   DBInstanceType:
     Type: String
     Default: db.t2.micro
@@ -18,26 +16,24 @@ Parameters:
       - db.t2.micro
       - db.t2.small
       - db.t2.medium
-  DBSubnetGroupDescription:
-    Type: String
-  S3BucketName:
-    Type: String
+# DBInstanceIdentifier,DBSubnetGroupDescription,S3BucketName
+# 元々type:Stringのため記述不必要と判断し削除いたしました。
 
 # EC2
 Resources:
-  lecture10:
+  Lecture10EC2:
     Type: AWS::EC2::Instance
     Properties:
       NetworkInterfaces:
-        - SubnetId: !ImportValue NetworkLayer-PublicSubnet1a
+        - SubnetId: !ImportValue PublicSubnet1aId
           GroupSet:
-            - !ImportValue SecurityLayer-lecture10sg
+            - !ImportValue Lecture10SgId
           DeviceIndex: 0
       InstanceType: !Ref InstanceType
       ImageId: ami-027a31eff54f1fe4c
       Tags:
         - Key: Name
-          Value: lecture10
+          Value: Lecture10EC2
       KeyName: raizetech-ec2-1.1
       IamInstanceProfile: !Ref IamInstanceProfile
   
@@ -46,62 +42,55 @@ Resources:
     Properties:
       Path: /
       Roles:
-        - !Ref EC2InstanceRole
+        - !ImportValue EC2InstanceRoleExportName
 
-# Secrets Managet
-  RDSSecret: 
-    Type: "AWS::SecretsManager::Secret"
-    Properties:
-      Name: "RDSSecret"
-      Description: "RDS password for my RDS instance"
-      GenerateSecretString:
-        SecretStringTemplate: '{"username": "admin"}'
-        GenerateStringKey: "password"
-        PasswordLength: 16
-        ExcludeCharacters: '"@/\'
 # RDS
-  lecture10rds:
+  Lecture10RDS:
     Type: AWS::RDS::DBInstance
     Properties:
-      DBInstanceIdentifier: "lecture10rds"
+      DBInstanceIdentifier: "Lecture10RDS"
       AllocatedStorage : 20
       DBInstanceClass: !Ref DBInstanceType
       Port: 3306
       StorageType: gp2
       BackupRetentionPeriod: 1
       MasterUsername: admin
-      MasterUserPassword: !Sub '{{resolve:secretsmanager:${RDSSecret}:SecretString:password}}'
-      DBName: lecture10rds
+      MasterUserPassword: !Join 
+        - "" 
+        - - "{{resolve:secretsmanager:"
+          - !ImportValue RDSSecretArn
+          - ":SecretString:password}}"
+      DBName: Lecture10RDS
       Engine: mysql
       EngineVersion: 8.0.33
-      DBSubnetGroupName: !Ref lecture10RDSSubnetgroup
+      DBSubnetGroupName: !Ref Lecture10RDSSubnetgroup
       MultiAZ: false
       VPCSecurityGroups:
-        - !ImportValue SecurityLayer-lecture10rdssg
+        - !ImportValue Lecture10RDSSgId
 
-  lecture10RDSSubnetgroup:
+  Lecture10RDSSubnetgroup:
     Type: AWS::RDS::DBSubnetGroup
     Properties:
       DBSubnetGroupDescription: "My RDS Subnet Group"
-      DBSubnetGroupName: lecture10RDSSubnetgroup
+      DBSubnetGroupName: Lecture10RDSSubnetgroup
       SubnetIds:
-        - !ImportValue NetworkLayer-PrivateSubnet1a
-        - !ImportValue NetworkLayer-PrivateSubnet1c
+        - !ImportValue PrivateSubnet1aId
+        - !ImportValue PrivateSubnet1cId
 
-  lecture10ALB:
+  Lecture10ALB:
     Type: AWS::ElasticLoadBalancingV2::LoadBalancer
     Properties:
       IpAddressType: ipv4
-      Name: lecture10ALB
+      Name: Lecture10ALB
       Scheme: internet-facing
       SecurityGroups:
-        - !ImportValue SecurityLayer-SecurityGroupALB
+        - !ImportValue SecurityGroupALBId
       Subnets:
-        - !ImportValue NetworkLayer-PublicSubnet1a
-        - !ImportValue NetworkLayer-PublicSubnet1c
+        - !ImportValue PublicSubnet1aId
+        - !ImportValue PublicSubnet1cId
       Tags:
         - Key: Name
-          Value: lecture10ALB
+          Value: Lecture10ALB
 
 # ALBのターゲットグループの指定
   ALBTargetGroup:
@@ -112,9 +101,9 @@ Resources:
       Protocol: HTTP
       Targets:
         - Id:
-            Ref: lecture10
+            Ref: Lecture10EC2
           Port: 80
-      VpcId: !ImportValue NetworkLayer-lecture10
+      VpcId: !ImportValue Lecture10VpcId
 
 # ALBのリスナーの指定
   ALBListener:
@@ -125,51 +114,28 @@ Resources:
           TargetGroupArn:
             !Ref ALBTargetGroup
       LoadBalancerArn:
-        !Ref lecture10ALB
+        !Ref Lecture10ALB
       Port: 80
       Protocol: HTTP
-#S3
-  lecture10mura03s3:
+# S3
+  Lecture10mura03s3:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: lecture10mura03s3
-      AccessControl: Private
-      PublicAccessBlockConfiguration:
-        BlockPublicAcls: false
-        BlockPublicPolicy: false
-        IgnorePublicAcls: false
-        RestrictPublicBuckets: false
+      AccessControl: Private 
+      # Privateに設定しているため特定公開のアクセス制御は不必要と考え、
+      # BlockPublicAcls,BlockPublicPolicy,IgnorePublicAcls,RestrictPublicBucketsの設定を削除しました。
       VersioningConfiguration:
         Status: Enabled
-  lecture10mura03s3BucketPolicy:
+  Lecture10mura03s3BucketPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:
-      Bucket: !Ref lecture10mura03s3
+      Bucket: !Ref Lecture10mura03s3
       PolicyDocument:
         Version: "2012-10-17"
         Statement:
           - Effect: "Allow"
-            Principal:
-              AWS: !Sub "arn:aws:iam::${AWS::AccountId}:role/EC2InstanceRole"
             Action: "s3:*"
             Resource: !Sub "arn:aws:s3:::lecture10mura03s3/*"
-#IAMロール
-  EC2InstanceRole:
-    Type: "AWS::IAM::Role"
-    Properties:
-      RoleName: "EC2InstanceRole"
-      AssumeRolePolicyDocument:
-        Version: "2012-10-17"
-        Statement:
-          - Effect: "Allow"
             Principal:
-              Service: "ec2.amazonaws.com"
-            Action: "sts:AssumeRole"
-      Policies:
-        - PolicyName: "S3FullAccessPolicy"
-          PolicyDocument:
-            Version: "2012-10-17"
-            Statement:
-              - Effect: "Allow"
-                Action: "s3:*"
-                Resource: "*"
+              AWS: !ImportValue EC2InstanceRoleExportArn
