@@ -1,0 +1,117 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Security_Layer Template
+
+Resources:
+  Lecture10Sg:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Lecture10Sg
+      GroupName: Lecture10Sg
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          SourceSecurityGroupId: !Ref SecurityGroupALB
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 14.10.35.32/32
+      Tags:
+        - Key: Name
+          Value: Lecture10Sg
+      VpcId: !ImportValue Lecture10VpcId
+  Lecture10RDSSg:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Lecture10RDSSg
+      GroupName: Lecture10RDSSg
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 3306
+          ToPort: 3306
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: Lecture10RDSSg
+      VpcId: !ImportValue Lecture10VpcId
+
+  SecurityGroupALB:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: SecurityGroupALB
+      GroupName: SecurityGroupALB
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: SecurityGroupALB
+      VpcId: !ImportValue Lecture10VpcId
+  
+  # セキュリティ面を考慮しIAMロール,SecretManagetの設定をApplicationLayerから移動しました。
+  #IAMロール
+  EC2InstanceRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      RoleName: "EC2InstanceRole"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal:
+              Service: "ec2.amazonaws.com"
+            Action: "sts:AssumeRole"
+      Policies:
+        - PolicyName: "S3FullAccessPolicy"
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: "Allow"
+                Action: "s3:*"
+                Resource: "*"
+  
+  # Secrets Managet
+  RDSSecret: 
+    Type: "AWS::SecretsManager::Secret"
+    Properties:
+      Name: "RDSSecret"
+      Description: "RDS password for my RDS instance"
+      GenerateSecretString:
+        SecretStringTemplate: '{"username": "admin"}'
+        GenerateStringKey: "password"
+        PasswordLength: 16
+        ExcludeCharacters: '"@/\'
+
+# 出力内容を確認し、中身が分かりやすいよう名称を変更しました。
+Outputs:
+  Lecture10Sg:
+    Value: !Ref Lecture10Sg
+    Export:
+      Name: Lecture10SgId
+
+  Lecture10RDSSg:
+    Value: !Ref Lecture10RDSSg
+    Export:
+      Name: Lecture10RDSSgId
+
+  SecurityGroupALB:
+    Value: !Ref SecurityGroupALB
+    Export:
+      Name: SecurityGroupALBId
+
+  EC2InstanceRoleName:
+    Value: !Ref EC2InstanceRole
+    Export:
+      Name: EC2InstanceRoleExportName
+  
+  EC2InstanceRoleArn:
+    Value: !GetAtt EC2InstanceRole.Arn
+    Export:
+      Name: EC2InstanceRoleExportArn
+
+  RDSSecretArn:
+    Value: !Ref RDSSecret
+    Export:
+      Name: RDSSecretArn

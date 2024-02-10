@@ -1,0 +1,135 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Network_Layer Template
+
+Resources:
+  Lecture10Vpc:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsSupport: true
+      Tags:
+        - Key: Name
+          Value: Lecture10Vpc
+
+# Subnet
+  PublicSubnet1a:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: "ap-northeast-1a"
+      VpcId: !Ref Lecture10Vpc
+      CidrBlock: 10.0.0.0/20
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: PubricSubnet1a
+  
+  PrivateSubnet1a:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: "ap-northeast-1a"
+      VpcId: !Ref Lecture10Vpc
+      CidrBlock: 10.0.128.20/20
+      Tags:
+        - Key: Name
+          Value: PrivateSubnet1a
+
+  PublicSubnet1c:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: "ap-northeast-1c"
+      VpcId: !Ref Lecture10Vpc
+      CidrBlock: 10.0.16.0/20
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: PublicSubnet1c
+  
+  PrivateSubnet1c:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: "ap-northeast-1c"
+      VpcId: !Ref Lecture10Vpc
+      CidrBlock: 10.0.144.0/20
+      Tags:
+        - Key: Name
+          Value: PrivateSubnet1c
+
+# InternetGatewayとRouteTableを作成
+  Lecture10Igw:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: Lecture10Igw
+  AttachGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref Lecture10Vpc
+      InternetGatewayId: !Ref Lecture10Igw
+
+  PublicRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref Lecture10Vpc
+      Tags:
+        - Key: Name
+          Value: PublicRouteTable
+  PrivateRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref Lecture10Vpc
+      Tags:
+        - Key: Name
+          Value: PrivateRouteTable
+
+# SubnetとRoutetableの関連付け
+  PublicRouteTableAssociation1a:
+      Type: AWS::EC2::SubnetRouteTableAssociation
+      Properties:
+        RouteTableId: !Ref PublicRouteTable
+        SubnetId: !Ref PublicSubnet1a
+  PublicRouteTableAssociation1c:
+      Type: AWS::EC2::SubnetRouteTableAssociation
+      Properties:
+        RouteTableId: !Ref PublicRouteTable
+        SubnetId: !Ref PublicSubnet1c
+  PrivateRouteTableAssociation1a:
+      Type: AWS::EC2::SubnetRouteTableAssociation
+      Properties:
+        RouteTableId: !Ref PrivateRouteTable
+        SubnetId: !Ref PrivateSubnet1a
+  PrivateRouteTableAssociation1c:
+      Type: AWS::EC2::SubnetRouteTableAssociation
+      Properties:
+        RouteTableId: !Ref PrivateRouteTable
+        SubnetId: !Ref PrivateSubnet1c
+
+# Routeの指定
+  PublicRoute:
+      Type: AWS::EC2::Route
+      Properties:
+        DestinationCidrBlock: 0.0.0.0/0
+        RouteTableId: !Ref PublicRouteTable
+        GatewayId: !Ref Lecture10Igw
+  
+Outputs:
+  Lecture10Vpc:
+    Value: !Ref Lecture10Vpc
+    Export:
+      Name: Lecture10VpcId
+  PublicSubnet1a:
+    Value: !Ref PublicSubnet1a
+    Export:
+      Name: PublicSubnet1aId
+  PublicSubnet1c:
+    Value: !Ref PublicSubnet1c
+    Export:
+      Name: PublicSubnet1cId
+  PrivateSubnet1a:
+    Value: !Ref PrivateSubnet1a
+    Export:
+      Name: PrivateSubnet1aId
+  PrivateSubnet1c:
+    Value: !Ref PrivateSubnet1c
+    Export:
+      Name: PrivateSubnet1cId

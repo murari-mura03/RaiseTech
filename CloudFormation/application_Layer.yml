@@ -1,0 +1,141 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Application_Layer Template
+
+Parameters:
+  InstanceType:
+    Type: String
+    Default: t2.micro
+    AllowedValues:
+      - t2.micro
+      - m1.small
+      - m1.large
+  DBInstanceType:
+    Type: String
+    Default: db.t2.micro
+    AllowedValues:
+      - db.t2.micro
+      - db.t2.small
+      - db.t2.medium
+# DBInstanceIdentifier,DBSubnetGroupDescription,S3BucketName
+# 元々type:Stringのため記述不必要と判断し削除いたしました。
+
+# EC2
+Resources:
+  Lecture10EC2:
+    Type: AWS::EC2::Instance
+    Properties:
+      NetworkInterfaces:
+        - SubnetId: !ImportValue PublicSubnet1aId
+          GroupSet:
+            - !ImportValue Lecture10SgId
+          DeviceIndex: 0
+      InstanceType: !Ref InstanceType
+      ImageId: ami-027a31eff54f1fe4c
+      Tags:
+        - Key: Name
+          Value: Lecture10EC2
+      KeyName: raizetech-ec2-1.1
+      IamInstanceProfile: !Ref IamInstanceProfile
+
+  IamInstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Path: /
+      Roles:
+        - !ImportValue EC2InstanceRoleExportName
+
+# RDS
+  Lecture10RDS:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBInstanceIdentifier: "Lecture10RDS"
+      AllocatedStorage : 20
+      DBInstanceClass: !Ref DBInstanceType
+      Port: 3306
+      StorageType: gp2
+      BackupRetentionPeriod: 1
+      MasterUsername: admin
+      MasterUserPassword: !Join 
+        - "" 
+        - - "{{resolve:secretsmanager:"
+          - !ImportValue RDSSecretArn
+          - ":SecretString:password}}"
+      DBName: Lecture10RDS
+      Engine: mysql
+      EngineVersion: 8.0.33
+      DBSubnetGroupName: !Ref Lecture10RDSSubnetgroup
+      MultiAZ: false
+      VPCSecurityGroups:
+        - !ImportValue Lecture10RDSSgId
+
+  Lecture10RDSSubnetgroup:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties:
+      DBSubnetGroupDescription: "My RDS Subnet Group"
+      DBSubnetGroupName: Lecture10RDSSubnetgroup
+      SubnetIds:
+        - !ImportValue PrivateSubnet1aId
+        - !ImportValue PrivateSubnet1cId
+
+  Lecture10ALB:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      IpAddressType: ipv4
+      Name: Lecture10ALB
+      Scheme: internet-facing
+      SecurityGroups:
+        - !ImportValue SecurityGroupALBId
+      Subnets:
+        - !ImportValue PublicSubnet1aId
+        - !ImportValue PublicSubnet1cId
+      Tags:
+        - Key: Name
+          Value: Lecture10ALB
+
+# ALBのターゲットグループの指定
+  ALBTargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      Name: ALBTargetGroup
+      Port: 80
+      Protocol: HTTP
+      Targets:
+        - Id:
+            Ref: Lecture10EC2
+          Port: 80
+      VpcId: !ImportValue Lecture10VpcId
+
+# ALBのリスナーの指定
+  ALBListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn:
+            !Ref ALBTargetGroup
+      LoadBalancerArn:
+        !Ref Lecture10ALB
+      Port: 80
+      Protocol: HTTP
+# S3
+  Lecture10mura03s3:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: lecture10mura03s3
+      AccessControl: Private 
+      # Privateに設定しているため特定公開のアクセス制御は不必要と考え、
+      # BlockPublicAcls,BlockPublicPolicy,IgnorePublicAcls,RestrictPublicBucketsの設定を削除しました。
+      VersioningConfiguration:
+        Status: Enabled
+  Lecture10mura03s3BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref Lecture10mura03s3
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Action: "s3:*"
+            Resource: !Sub "arn:aws:s3:::lecture10mura03s3/*"
+            Principal:
+              - AWS: !ImportValue EC2InstanceRoleExportArn
