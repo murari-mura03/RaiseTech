@@ -122,9 +122,6 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: lecture10mura03s3
-      AccessControl: Private 
-      # Privateに設定しているため特定公開のアクセス制御は不必要と考え、
-      # BlockPublicAcls,BlockPublicPolicy,IgnorePublicAcls,RestrictPublicBucketsの設定を削除しました。
       VersioningConfiguration:
         Status: Enabled
   Lecture10mura03s3BucketPolicy:
@@ -136,6 +133,6 @@ Resources:
         Statement:
           - Effect: "Allow"
             Action: "s3:*"
-            Resource: !Sub "arn:aws:s3:::lecture10mura03s3/*"
+            Resource: lecture10mura03s3
             Principal:
               - AWS: !ImportValue EC2InstanceRoleExportArn

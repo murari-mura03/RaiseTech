@@ -1,6 +1,14 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: Network_Layer Template
 
+Parameters:
+  FirstAvailabilityZone:
+    Type: AWS::EC2::AvailabilityZone::Name
+    Description: "Specify the first availability zone for the network resources"
+  SecondAvailabilityZone:
+    Type: AWS::EC2::AvailabilityZone::Name
+    Description: "Specify the second availability zone for the network resources"
+
 Resources:
   Lecture10Vpc:
     Type: AWS::EC2::VPC
@@ -15,7 +23,7 @@ Resources:
   PublicSubnet1a:
     Type: AWS::EC2::Subnet
     Properties:
-      AvailabilityZone: "ap-northeast-1a"
+      AvailabilityZone: !Ref FirstAvailabilityZone
       VpcId: !Ref Lecture10Vpc
       CidrBlock: 10.0.0.0/20
       MapPublicIpOnLaunch: true
@@ -26,7 +34,7 @@ Resources:
   PrivateSubnet1a:
     Type: AWS::EC2::Subnet
     Properties:
-      AvailabilityZone: "ap-northeast-1a"
+      AvailabilityZone: !Ref FirstAvailabilityZone
       VpcId: !Ref Lecture10Vpc
       CidrBlock: 10.0.128.20/20
       Tags:
@@ -36,7 +44,7 @@ Resources:
   PublicSubnet1c:
     Type: AWS::EC2::Subnet
     Properties:
-      AvailabilityZone: "ap-northeast-1c"
+      AvailabilityZone: !Ref SecondAvailabilityZone
       VpcId: !Ref Lecture10Vpc
       CidrBlock: 10.0.16.0/20
       MapPublicIpOnLaunch: true
@@ -47,7 +55,7 @@ Resources:
   PrivateSubnet1c:
     Type: AWS::EC2::Subnet
     Properties:
-      AvailabilityZone: "ap-northeast-1c"
+      AvailabilityZone: !Ref SecondAvailabilityZone
       VpcId: !Ref Lecture10Vpc
       CidrBlock: 10.0.144.0/20
       Tags:
