@@ -1,7 +1,7 @@
 # 第12回講義課題
 + [CircleCIのサンプルコンフィグ](https://github.com/MasatoshiMizumoto/raisetech_documents/tree/main/aws/samples/circleci)をリポジトリに組み込み、正しく動作させる。
 
-CiecleCIとは
+## CiecleCIとは
 - CircleCIとは、Saas型のCI/CDサービス。ビルド・テスト・デプロイを自動で行うことができる。  
   
 
@@ -47,10 +47,12 @@ workflows:
 ![Alt text](images12/fail.png)
 
 ### エラー内容
+---
   + AccessControlを使用する代わりにAWS::S3::BucketPolicyを使用することを検討するよう勧告。
   + cloudformation/Application_Layer.ymlファイルの139行目変数が見つからないため、Fn::Subの記述が不要であることの指摘。
   + リージョン固有の値をハードコードしていることを指摘。パラメーターまたはリファレンスを使用して、柔軟性を持たせることが推奨される。
 
 ### 3. エラー内容を修正し再度テストを施行
++ [cloudformationテンプレート]((cloudformation))内の当該箇所を修正し再テストする。
    ![   ](images12/success.png)
-   成功を確認。
+   + 成功を確認。
