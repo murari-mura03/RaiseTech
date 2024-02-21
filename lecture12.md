@@ -19,7 +19,7 @@
 ### 1. [公式ドキュメント](https://circleci.com/docs/ja/getting-started/)通りに操作しCiecleCIに接続する。
    + circleci-project-setupというブランチに.circleci/config.ymlが作成される。
    + パイプライン上でsay-hello-workflowというジョブが実行される。
-    ![Alt text](images12/helloworld.png)
+    ![helloworld](images12/helloworld.png)
    + ジョブの成功を確認。
 ### 2. 新しくブランチを作成(lecture12)し.circleci/config.ymlをプッシュする。
    + /.circleciにconfig.ymlをCircleCIのサンプルコンフィグへ変更する。
@@ -44,7 +44,7 @@ workflows:
       - cfn-lint
 ```
  + エラーが発生
-![Alt text](images12/fail.png)
+![fail](images12/fail.png)
 
 ### エラー内容
 ---
@@ -53,6 +53,6 @@ workflows:
   + リージョン固有の値をハードコードしていることを指摘。パラメーターまたはリファレンスを使用して、柔軟性を持たせることが推奨される。
 
 ### 3. エラー内容を修正し再度テストを施行
-+ [cloudformationテンプレート]((cloudformation))内の当該箇所を修正し再テストする。
-   ![   ](images12/success.png)
++ [cloudformationテンプレート](/cloudformation/)内の当該箇所を修正し再テストする。
+   ![success](images12/success.png)
    + 成功を確認。
