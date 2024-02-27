@@ -24,6 +24,7 @@
 1. [AWS公式サイト](https://aws.amazon.com/jp/register-flow/)を参考にアカウントの作成を行う。
 2. rootユーザーが作成できたらコンソール画面よりセキュリティ認証情報を選択。
    ![Alt text](images01/0103.png)
+
 3. MFAデバイスの割り当てをクリックし、｢仮想MFAデバイス｣を選択。
    ![Alt text](images01/0104.png)
 4. 認証アプリで追加を選択し、QRコードを使い設定を行う。
@@ -60,7 +61,7 @@
 ![Alt text](images01/0109.png)
 6. 環境フォルダ上(この場合はLecture01)を右クリックし、Rubyファイルを作成する。
    
-![Alt text](images01/0110.png)![Alt text](images01/0116.png)
+   ![Alt text](images01/0110.png)![Alt text](images01/0116.png)
 
 7. 作成したRubyファイルにエディター上でHelloWorldの記述をする。
 ![Alt text](images01/0112.png)
