@@ -23,7 +23,8 @@
 
 1. [AWS公式サイト](https://aws.amazon.com/jp/register-flow/)を参考にアカウントの作成を行う。
 2. rootユーザーが作成できたらコンソール画面よりセキュリティ認証情報を選択。
-   ![Alt text](images01/0103.png)
+![Alt text](images01/0103.png)
+
 
 3. MFAデバイスの割り当てをクリックし、｢仮想MFAデバイス｣を選択。
    ![Alt text](images01/0104.png)
