@@ -31,6 +31,11 @@
 - rootユーザーで作業することが好ましくないので、IAMユーザーを作成し権限を付与して使用します。
 - IAMユーザーはAWSアカウント内で作成できるユーザーで、紐づけられたIAMポリシー(今回はAdministratorAccess)によって操作できる内容が変化します。
 
+:::info
+<br>
+IAMポリシーを他のリソースにアタッチして使用する。  
+:::
+
 参考
 
 - [なぜAWSのrootユーザの利用が危険なのか？〜アカウント作成後の運用方法についてまとめてみた〜](https://dev.classmethod.jp/articles/rootuser-risk/)
