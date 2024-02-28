@@ -59,6 +59,7 @@
 
 
 ![Alt text](images02/0204.png)
+
 - ブランチ保護ルールが設定される。
 ![Alt text](images02/0205.png)
 
