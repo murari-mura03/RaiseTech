@@ -46,7 +46,7 @@ Select number: 2                           # 2を選択
 ## sample_spec.rb
 - 実際にテストする内容を記載するファイル。
 - 以下の記述を行う。
-```
+```ruby
 require 'spec_helper'
 
 listen_port = 80
