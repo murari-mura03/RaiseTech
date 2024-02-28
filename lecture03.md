@@ -1,4 +1,7 @@
 ## 第三回講義課題  
+
+サンプルアプリケーションを起動する。
+
 ![FireShot Capture 013 - Sortable Table Sandbox_ - 0e3df2216f9541edb71482ed56cf006d vfs cloud9 ap-northeast-1 amazonaws com](https://github.com/murari-mura03/RaizeTech/assets/150114064/0f3e926a-be13-4653-8de2-a2cb537acbcc)
 
 ### APサーバーについて
