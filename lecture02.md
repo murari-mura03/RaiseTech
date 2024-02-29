@@ -35,6 +35,7 @@
 - 右上のアイコンのsettingsへ移動。
 ![Alt text](images02/0221.png)
 - 左下のDeveloper settingsをクリック。
+
 ![Alt text](images02/2022.png)
 - `Fine-grained personal access tokens`を選択し`Generete new token`をクリック。
 ![Alt text](images02/2023.png)
@@ -103,7 +104,7 @@ cd ???
 
 #### 2. 作業用ブランチの作成と現在ブランチの切替(checkout)
 - `lecture02`という作業用ブランチを作成し`main`から`lecture02`へ移動する。
-- taouchコマンドでmdファイルを作成し、変更を加える。
+- touchコマンドで`lecture02`ブランチに`lecture02.md`ファイルを作成し、変更を加える。
 
 ```sh
 git checkout -b lecture02
@@ -117,11 +118,12 @@ touch lecture02.md
 ![Alt text](images02/0212.png)
 
 #### 3. ファイルのステージング(add)
+
 - 内容を変更した`lecture02.md`をステージングエリアに格納する。
 
 ```sh
 
-git add git-lecture.md
+git add lecture02.md
 
 # すべてのファイルをステージングする場合は、以下のコマンドでも良い。
 # git add .
@@ -144,7 +146,7 @@ git commit -m "add lecture02.md"
 - Passwordは先ほど作成した個人アクセストークン(PAT)を入力。(入力文字は見えない)
 
 ```sh
-git push origin git-lecture
+git push origin lecture02
 
 # git pushだけで実行すると指定が必要な元先のブランチ名称が返ってくる
 #git push
@@ -187,6 +189,11 @@ cat lecture02.md
 ```sh
 git branch -d git-lecture
 ```
+
+### 課題を終えての感想
+
+- githubの操作はあまり感覚的ではなく、何度も触ってみることでしか理解が深まらないと感じる。
+- 間違ってマージしてしまったら？コンフリクトを起こした場合の解消法は？など疑問が出てきたので追加で自学しておく。
 
 参考
 
