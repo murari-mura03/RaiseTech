@@ -20,13 +20,13 @@ $ git clone https://github.com/yuta-ushijima/raisetech-live8-sample-app.git
 
 # アプリケーションのディレクトリへ移動
 $ cd raisetech-live8-sample-app
-> 'Required ruby-3.1.2 is not installed.
-> To install do: 'rvm install "ruby-3.1.2"''
+'Required ruby-3.1.2 is not installed.
+To install do: 'rvm install "ruby-3.1.2"''
 
 # ruby-3.1.2がインストールされていないと表示
 $ rvm install "ruby-3.1.2"
 $ ruby -v # バージョンを確認
-> 'ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [x86_64-linux]'
+'ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [x86_64-linux]'
 
 # 動作環境に必要なツールをそれぞれインストールする
 # Bundler
@@ -87,9 +87,10 @@ $ less /etc/my.cnf
 ```sh
 $ bin/setup
 # エラーが発生
-> == Command ["bin/rails db:prepare"] failed ==
-> Mysql2::Error::ConnectionError: Can't connect to local MySQL server through socket '/tmp/mysql.sock' (2)
-→ ファイル変更の保存忘れ
+== Command ["bin/rails db:prepare"] failed ==
+Mysql2::Error::ConnectionError: Can't connect to local MySQL server through socket '/tmp/mysql.sock' (2)
+> MySQLサーバーに接続しようとした際にソケットが見つからなかった
+> ファイル変更の保存忘れだったため保存後解消
 ```
 
 ```sh
