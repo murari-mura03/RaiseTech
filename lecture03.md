@@ -81,7 +81,8 @@ $ less /etc/my.cnf
   
   ![Alt text](images03/0303.png)
 - detabase.ymlファイルを変更
-![Alt text](images03/0304.png)
+
+  ![Alt text](images03/0304.png)
 
 ```sh
 $ bin/setup
