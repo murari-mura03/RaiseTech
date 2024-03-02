@@ -8,6 +8,8 @@
 
 ## VPC作成
 
+
+
 ![vpc](https://github.com/murari-mura03/RaizeTech/assets/150114064/5b99fabd-4a8a-4226-90ad-e304219e85bc)
 
 ## EC2作成
@@ -28,6 +30,8 @@
 ![rds](https://github.com/murari-mura03/RaizeTech/assets/150114064/e5fdd398-4f7c-4ea4-b3d1-a3a2a9f8dbda)
 
 ![rds-subnet](https://github.com/murari-mura03/RaizeTech/assets/150114064/ac292cc2-4dfc-4c0e-9c0b-f1a2c2465962)
+
+- マスターパスワードは作成した時の[認証情報の詳細の表示]でしか確認できないので注意する。
 
 ## RDSセキュリティグループ
 
