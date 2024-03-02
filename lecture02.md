@@ -36,7 +36,7 @@
 ![Alt text](images02/0221.png)
 - 左下のDeveloper settingsをクリック。
 
-![Alt text](images02/2022.png)
+  ![Alt text](images02/2022.png)
 - `Fine-grained personal access tokens`を選択し`Generete new token`をクリック。
 ![Alt text](images02/2023.png)
 - 必要な権限を付与し作成完了。
@@ -59,11 +59,11 @@
   - 承認を要求(必要承認回数 1)
 
 
-![Alt text](images02/0204.png)
+  ![Alt text](images02/0204.png)
 
 - ブランチ保護ルールが設定される。
 
-![Alt text](images02/0205.png)
+  ![Alt text](images02/0205.png)
 
 ### 3. Cloud9のGit設定変更
 

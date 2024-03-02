@@ -22,6 +22,16 @@
 ## 今回使用したコマンド
 
 ```sh
+# 新規リポジトリのデフォルトブランチ名をmainに変更
+git config --global init.defaultBranch main
+
+# ユーザー名とメールアドレス
+# Gitは誰が変更したのかが重要な為、この設定が必須
+git config --global user.name "ユーザー名"
+git config --global user.email "メールアドレス"
+```
+
+```sh
 git clone https://??? # クローンするリポジトリのURL
 cd #作業するディレクトリに移動
 git checkout -b `作成するブランチ名`
