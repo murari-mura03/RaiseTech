@@ -120,7 +120,7 @@ $ git clone https://github.com/yuta-ushijima/raisetech-live8-sample-app.git
 $ cd raisetech-live8-sample-app
 ```
 
-## データベースの設定、MySQLの起動確認
+## MySQLのインストールと起動確認
 
 ```sh
 # mariadbを確認
@@ -176,7 +176,7 @@ $ sudo systemctl status mysqld.service
            mq1634 /usr/sbin/mysqld
 ```
 
-- RDSと接続
+## RDSと接続
 
 ```sh
 # RDSと接続
@@ -192,6 +192,8 @@ default: &default
   password: ****
   host:RDSのエンドポイント
 ```
+
+## 環境構築
 
 ```sh
 #環境構築
