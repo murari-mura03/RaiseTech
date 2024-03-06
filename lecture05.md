@@ -55,7 +55,7 @@ $ source ~/.bash_profile
 - ruby-buildはrubyをインストールするためのrbenvプラグイン
 
 ```sh
-$ git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+$ git clone http://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 $ cd ~/.rbenv/plugins/ruby-build
 $ sudo ./install.sh
 ```
