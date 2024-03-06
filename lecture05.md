@@ -22,12 +22,13 @@ $ sudo yum install git bzip2 readline-devel zlib-devel gcc libyaml-devel libffi-
 
 - 必要なパッケージについては[Railsコア開発環境の構築方法](https://railsguides.jp/development_dependencies_install.html)を参照
 
-  > [!NOTE]
-  > - Linuxにおいてリポジトリとはパッケージを管理しておく場所で、パッケージの倉庫のようなもの。
-  >   - リポジトリ:ソフトウェアが保管されている場所
-  >   - パッケージ:ソフトウェアの一連のファイルをまとめたもの
-  > - パッケージを使用する時はリモートリポジトリをローカルにダウンロードして、ローカル内のリポジトリからパッケージをインストールする。
-  > - Amazon Linux 2ではamzn2-core、および amzn2extra-dockerが有効になっている。
+> [!NOTE]
+>
+> - Linuxにおいてリポジトリとはパッケージを管理しておく場所で、パッケージの倉庫のようなもの。
+>   - リポジトリ:ソフトウェアが保管されている場所
+>   - パッケージ:ソフトウェアの一連のファイルをまとめたもの
+> - パッケージを使用する時はリモートリポジトリをローカルにダウンロードして、ローカル内のリポジトリからパッケージをインストールする。
+> - Amazon Linux 2ではamzn2-core、および amzn2extra-dockerが有効になっている。
 
 参考
 - [パッケージ管理 入門（Redhat系）](https://envader.plus/course/11/scenario/1122#Linux%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%AE%E6%A6%82%E5%BF%B5)
