@@ -22,7 +22,7 @@ $ sudo yum install git bzip2 readline-devel zlib-devel gcc libyaml-devel libffi-
 
 - 必要なパッケージについては[Railsコア開発環境の構築方法](https://railsguides.jp/development_dependencies_install.html)を参照
 
-  >[!NOTE]
+  > [!NOTE]
   > - Linuxにおいてリポジトリとはパッケージを管理しておく場所で、パッケージの倉庫のようなもの。
   >   - リポジトリ:ソフトウェアが保管されている場所
   >   - パッケージ:ソフトウェアの一連のファイルをまとめたもの
