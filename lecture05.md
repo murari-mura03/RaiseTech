@@ -58,6 +58,7 @@ $ source ~/.bash_profile
 $ git clone http://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 $ cd ~/.rbenv/plugins/ruby-build
 $ sudo ./install.sh
+$ cd ~
 ```
 
 >[!WARNING]
@@ -83,7 +84,7 @@ $ gem install bundler -v 2.3.14
 ## railsのインストール
 
 ```sh
-$ install rails -v 7.0.4
+$ gem install rails -v 7.0.4
 $ rails -v
 Rails 7.0.4
 ```
@@ -126,6 +127,8 @@ $ cd raisetech-live8-sample-app
 ```sh
 # mariadbを確認
 $ yum list installed | grep mariadb
+mariadb-devel.x86_64                1:5.5.68-1.amzn2.0.1             @amzn2-core
+mariadb-libs.x86_64                 1:5.5.68-1.amzn2.0.1             installed  
 # mariadbを削除
 $ sudo yum remove mariadb-*
 ```
@@ -135,12 +138,10 @@ $ sudo yum remove mariadb-*
 
 ```sh
 # MySQLのリポジトリをyumに追加する
-$sudo yum localinstall https://dev.mysql.com/get/mysql80-community-release-el7-5.noarch.rpm
+$ sudo yum localinstall -y https://dev.mysql.com/get/mysql80-community-release-el7-11.noarch.rpm
 # 必要なパッケージをインストールする
-$sudo yum install -y --enablerepo=mysql80-community mysql-community-server
-$sudo yum localinstall -y https://dev.mysql.com/get/mysql80-community-release-el7-11.noarch.rpm
-$sudo yum install -y --enablerepo=mysql80-community mysql-community-server
-$sudo yum install -y --enablerepo=mysql80-community mysql-community-devel
+$ sudo yum install -y --enablerepo=mysql80-community mysql-community-server
+sudo yum install -y --enablerepo=mysql80-community mysql-community-devel
 ```
 
 ```sh
