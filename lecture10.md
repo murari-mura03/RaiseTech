@@ -9,11 +9,11 @@
 
 - ネットワーク、セキュリティ、アプリケーションのレイヤーにそれぞれ分けて作成。
 
-|スタック                           |    リソース                                                                                                    | 
-| :------------------------------- | ------------------------------------------------------------------------------------------------------ | 
-| Network_Layer             | VPC<br>PublicSubnet<br>PrivateSubnet<br>InternetGateWay<br>RouteTable                                  | 
-| Security_Layer                | EC2SecurityGroup<br>RDSSecurityGroup<br>ALBSecurityGroup<br>Secrets Managet<br>IAMRole                                              | 
-| Application_Layer | EC2<br>RDS<br>Secrets Managet<br>RDSSubnetGroup<br>ALB<br>ALBTargetGroup<br>ALBLisner<br>S3<br>| 
+|スタック|リソース|
+| :---| :--- |
+|Network_Layer| ● VPC<br>● PublicSubnet<br> ● PrivateSubnet<br> ● InternetGateWay<br> ● RouteTable|
+|Security_Layer|● EC2SecurityGroup<br>● RDSSecurityGroup<br>● ALBSecurityGroup<br>● Secrets Managet<br>● IAMRole|
+|Application_Layer|● EC2<br>● RDS<br>● Secrets Managet<br>● RDSSubnetGroup<br>● ALB<br>● ALBTargetGroup<br>● ALBLisner<br>● S3<br>|
 
 ## 実際のテンプレート
 
