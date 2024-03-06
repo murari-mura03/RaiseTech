@@ -193,8 +193,20 @@ default: &default
   host:RDSのエンドポイント
 ```
 
+```sh
+#環境構築
+$ bin/setup
+$ bin/dev
+```
+
 - セキュリティグループにポート3000を追加
+- http://自分のEIPアドレス:3000で稼働確認
 ![スクリーンショット 2023-11-30 153834](https://github.com/murari-mura03/RaizeTech/assets/150114064/03653871-fd80-4849-99d1-8d9f68d29de3)
+
+参考
+
+- [AWS EC2 AmazonLinux2 MySQLをインストールする](https://qiita.com/miriwo/items/eb09c065ee9bb7e8fe06) #Qiita @mirimiripcより
+- [AWS Rails 6 + MySQL + Nginx な環境の作成方法 サーバー編](https://takelg.com/aws_create_rails_development_server/)
 
 2.Nginx+Unicornで起動
 - Nginxのインストール
