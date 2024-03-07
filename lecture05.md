@@ -34,31 +34,18 @@ $ sudo yum install git bzip2 readline-devel zlib-devel gcc libyaml-devel libffi-
 - [パッケージ管理 入門（Redhat系）](https://envader.plus/course/11/scenario/1122#Linux%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%AE%E6%A6%82%E5%BF%B5)
 - [yumコマンドでパッケージ管理](https://www.wakuwakubank.com/posts/275-linux-yum/ )
 
-## rbenvのインストール
+## ruby-build, rbenvのインストール
 
 - rebenvは簡単にrubyのバージョンを切れ変えられるツール
-
-```sh
-$ git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
-```
-
-- 上記でだけでは、コマンド実行できないのでPATHを通す。
-
-```sh
-$ echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
-$ echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
-$ source ~/.bash_profile
-```
-
-## ruby-buildのインストール
-
 - ruby-buildはrubyをインストールするためのrbenvプラグイン
 
 ```sh
-$ git clone http://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
-$ cd ~/.rbenv/plugins/ruby-build
-$ sudo ./install.sh
-$ cd ~
+$ git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+$ git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+$ sudo ~/.rbenv/plugins/ruby-build/install.sh
+$ echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
+$ echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
+$ source ~/.bash_profile
 ```
 
 >[!WARNING]
