@@ -8,15 +8,19 @@
 3. S3 を追加
 4. 環境の構成図を作成
 ```
+
 ## 1.組み込みサーバーで動作確認
 
+### sudo yum updateを実行
+
 ```sh
-#sudo yum update実行
 $ sudo yum update -y
 ```
 
+### Railsに必要なパッケージをインストール
+
 ```sh
-#Railsに必要なパッケージをインストール
+
 $ sudo yum install git bzip2 readline-devel zlib-devel gcc libyaml-devel libffi-devel gdbm-devel ncurses-devel gcc-c++ mysql-devel ImageMagick ImageMagick-devel epel-release
 ```
 
@@ -34,7 +38,7 @@ $ sudo yum install git bzip2 readline-devel zlib-devel gcc libyaml-devel libffi-
 - [パッケージ管理 入門（Redhat系）](https://envader.plus/course/11/scenario/1122#Linux%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%AE%E6%A6%82%E5%BF%B5)
 - [yumコマンドでパッケージ管理](https://www.wakuwakubank.com/posts/275-linux-yum/ )
 
-## ruby-build, rbenvのインストール
+### rbenv,ruby-buildのインストール
 
 - rebenvは簡単にrubyのバージョンを切れ変えられるツール
 - ruby-buildはrubyをインストールするためのrbenvプラグイン
@@ -51,7 +55,7 @@ $ source ~/.bash_profile
 >[!WARNING]
 >rbenvからインストールしないとエラーが出るので注意。
 
-## rubyのインストール
+### rubyのインストール
 
 ```sh
 $ rbenv install 3.1.2
@@ -59,7 +63,7 @@ $ rbenv global 3.1.2
 $ rbenv rehash
 ```
 
-## bundlerのインストール
+### bundlerのインストール
 
 - bundlerは、gemの依存関係とバージョンを管理するためのgem。
 - gem同士の関係で問題が発生しないようにgemをインストールしたり、プロジェクトごとに分けることが可能となる。
@@ -68,7 +72,7 @@ $ rbenv rehash
 $ gem install bundler -v 2.3.14
 ```
 
-## railsのインストール
+### railsのインストール
 
 ```sh
 $ gem install rails -v 7.0.4
@@ -76,7 +80,7 @@ $ rails -v
 Rails 7.0.4
 ```
 
-## nvmのインストール
+### nvmのインストール
 
 - Node.jsが必要なのでnvmをインストールする。
 - nvmとは、rbenvのようなnodeのバージョンを切り替えられるツール。
@@ -87,7 +91,7 @@ $ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bas
 $ . ~/.nvm/nvm.sh
 ```
 
-## Node.jsのインストール
+### Node.jsのインストール
 
 ```sh
 $ nvm install 17.9.1
@@ -95,13 +99,13 @@ $ node -v
 v17.9.1
 ```
 
-## yarnのインストール
+### yarnのインストール
 
 ```sh
 $ npm install yarn -g
 ```
 
-## サンプルアプリのclone
+### サンプルアプリのclone
 
 ```sh
 $ git clone https://github.com/yuta-ushijima/raisetech-live8-sample-app.git
@@ -109,7 +113,7 @@ $ git clone https://github.com/yuta-ushijima/raisetech-live8-sample-app.git
 $ cd raisetech-live8-sample-app
 ```
 
-## MySQLのインストールと起動確認
+### MySQLのインストールと起動確認
 
 ```sh
 # mariadbを確認
@@ -128,7 +132,7 @@ $ sudo yum remove mariadb-*
 $ sudo yum localinstall -y https://dev.mysql.com/get/mysql80-community-release-el7-11.noarch.rpm
 # 必要なパッケージをインストールする
 $ sudo yum install -y --enablerepo=mysql80-community mysql-community-server
-sudo yum install -y --enablerepo=mysql80-community mysql-community-devel
+$ sudo yum install -y --enablerepo=mysql80-community mysql-community-devel
 ```
 
 ```sh
@@ -165,7 +169,7 @@ $ sudo systemctl status mysqld.service
            mq1634 /usr/sbin/mysqld
 ```
 
-## RDSと接続
+### RDSと接続
 
 ```sh
 # RDSと接続
@@ -182,7 +186,7 @@ default: &default
   host:RDSのエンドポイント
 ```
 
-## 環境構築
+### 環境構築
 
 ```sh
 #環境構築
@@ -199,24 +203,51 @@ $ bin/dev
 - [AWS EC2 AmazonLinux2 MySQLをインストールする](https://qiita.com/miriwo/items/eb09c065ee9bb7e8fe06) #Qiita @mirimiripcより
 - [AWS Rails 6 + MySQL + Nginx な環境の作成方法 サーバー編](https://takelg.com/aws_create_rails_development_server/)
 
-2.Nginx+Unicornで起動
-- Nginxのインストール
-- Nginxの起動確認
+## 2.Nginx+Unicornで起動
+
+### Nginxのインストール
+
+```sh
+#Nginxインストール
+$ sudo yum install http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm -y
+#Nginxのリポジトリをインストール
+$ sudo yum install nginx -y
+#Nginx接続確認
+$ sudo systemctl start nginx.service
+```
+
+```sh
+# Nginxの起動確認
+$ sudo systemctl status nginx.service
+● nginx.service - nginx - high performance web server
+   Loaded: loaded (/usr/lib/systemd/system/nginx.service; disabled; vendor preset: disabled)
+   Active: active (running) since Mon 2023-12-04 10:32:52 UTC; 8s ago
+     Docs: http://nginx.org/en/docs/
+  Process: 4802 ExecStart=/usr/sbin/nginx -c /etc/nginx/nginx.conf (code=exited, status=0/SUCCESS)
+ Main PID: 4803 (nginx)
+   CGroup: /system.slice/nginx.service
+           tq4803 nginx: master process /usr/sbin/nginx -c /etc/nginx/nginx.conf
+           mq4804 nginx: worker process
+```
+
+- 接続画面
 ![スクリーンショット 2023-11-30 184641](https://github.com/murari-mura03/RaizeTech/assets/150114064/9d26440b-b78b-4413-b17e-27029ed545ef)
+
 - nginx/conf.dの変更
 - Unicornの設定
 - Unicorn の起動・停止スクリプトを作成する(なくてもいい)
 - セキュリティグループにポート80を追加
 ![スクリーンショット 2023-12-06 154732](https://github.com/murari-mura03/RaizeTech/assets/150114064/b4af90f8-5180-48d6-81ec-e53eb36c9e34)
 
-3.ロードバランサーの設置
+## 3.ロードバランサーの設置
+
 - EC2ダッシュボードより作成
 - config/environments/development.rbに追記
 - DNS名で接続確認
 ![スクリーンショット 2023-12-08 175152](https://github.com/murari-mura03/RaizeTech/assets/150114064/bcbc072f-f059-444d-9a59-43a316d4bd21)
 ![スクリーンショット 2023-12-06 210923](https://github.com/murari-mura03/RaizeTech/assets/150114064/2a334da1-5f3a-41b3-bf85-24fe71444bd2)
 
-4.S3の設置
+## 4.S3の設置
 - IAMロールを作成
 - EC2インスタンスにアタッチ
 - インスタンスを再起動
@@ -224,6 +255,6 @@ $ bin/dev
 ![スクリーンショット 2023-12-08 173024](https://github.com/murari-mura03/RaizeTech/assets/150114064/c6e90365-f7e5-4bac-85bc-cf82ac049041)
 S3へ画像のアップロードを確認
 
-5.構成図作成
+## 5.構成図作成
 
 ![lecture-ページ2 drawio](https://github.com/murari-mura03/RaizeTech/assets/150114064/c9e38c74-b60c-4774-ab26-58bfdc3f9daa)

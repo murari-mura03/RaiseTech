@@ -78,7 +78,6 @@
 ![Alt text](images04/0406.png)
 ![Alt text](images04/0407.png)
 
-
 ## EC2でRDSに接続
 
 - SSH接続クライアント：TeraTerm
@@ -88,5 +87,6 @@
 ![Alt text](images04/0408.png)
 
 参考
+
 - [【初心者向け】RDS for MySQLを構築しEC2からアクセスしてみる](https://dev.classmethod.jp/articles/sales-rds-ec2-session/)
 - [既存の IPv4 CIDR ルールに 1 つの 参照先のグループ ID を指定することはできません。]( https://qiita.com/himorishuhei/items/7426cab6cd83c3d8e4e3)#Qiita 
