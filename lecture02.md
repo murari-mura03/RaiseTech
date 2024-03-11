@@ -81,7 +81,7 @@ git config --global user.email "メールアドレス"
 ```
 
 ![Alt text](images02/0207.png)
-- 個人メールアドレスを公開したくない場合こちらで受信専用のメールアドレス入手できる。
+- 個人メールアドレスを公開したくない場合こちらで受信専用のメールアドレスを入手できる。
 ![Alt text](images02/0206.png)
 
 ### 4. Pull Request の発行と完了報告

@@ -1,10 +1,11 @@
 # 第12回講義課題
-+ [CircleCIのサンプルコンフィグ](https://github.com/MasatoshiMizumoto/raisetech_documents/tree/main/aws/samples/circleci)をリポジトリに組み込み、正しく動作させる。
+
+[CircleCIのサンプルコンフィグ](https://github.com/MasatoshiMizumoto/raisetech_documents/tree/main/aws/samples/circleci)をリポジトリに組み込み、正しく動作させる。
 
 ## CiecleCIとは
+
 - CircleCIとは、Saas型のCI/CDサービス。ビルド・テスト・デプロイを自動で行うことができる。  
   
-
 ```markdown
 1. ビルド
 ・ソースコードから実行可能なアプリケーションを構築する。  
@@ -16,16 +17,23 @@
 ```
 
 ## 手順  
-### 1. [公式ドキュメント](https://circleci.com/docs/ja/getting-started/)通りに操作しCiecleCIに接続する。
+
+### 1. [公式ドキュメント](https://circleci.com/docs/ja/getting-started/)通りに操作しCiecleCIに接続する
+
 ---
-   + circleci-project-setupというブランチに.circleci/config.ymlが作成される。
-   + パイプライン上でsay-hello-workflowというジョブが実行される。
+
+- circleci-project-setupというブランチに.circleci/config.ymlが作成される。
+- パイプライン上でsay-hello-workflowというジョブが実行される。
     ![helloworld](images12/helloworld.png)
-   + ジョブの成功を確認。
-### 2. 新しくブランチを作成(lecture12)し.circleci/config.ymlをプッシュする。
+- ジョブの成功を確認。
+
+### 2. 新しくブランチを作成(lecture12)し.circleci/config.ymlをプッシュする
+
 ---
-   + /.circleciにconfig.ymlをサンプルコンフィグへ変更する。
-```   
+
+- /.circleciのconfig.ymlをサンプルコンフィグへ変更する。
+
+```yml
 version: 2.1
 orbs:
   python: circleci/python@2.0.3
@@ -45,17 +53,22 @@ workflows:
     jobs:
       - cfn-lint
 ```
- + エラーが発生
+
+- エラーが発生
 ![fail](images12/fail.png)
 
 ### エラー内容
+
 ---
-  + AccessControlを使用する代わりにAWS::S3::BucketPolicyを使用することを検討するよう勧告。より柔軟でセキュアなアクセス設定を行うことができる。
-  + cloudformation/Application_Layer.ymlファイルの139行目変数が見つからないため、Fn::Subの記述が不要であることの指摘。
-  + リージョン固有の値をハードコードしていることを指摘。パラメーターまたはリファレンスを使用して、柔軟性を持たせることが推奨される。
+
+- AccessControlを使用する代わりにAWS::S3::BucketPolicyを使用することを検討するよう勧告。より柔軟でセキュアなアクセス設定を行うことができる。
+- cloudformation/Application_Layer.ymlファイルの139行目変数が見つからないため、Fn::Subの記述が不要であることの指摘。
+- リージョン固有の値をハードコードしていることを指摘。パラメーターまたはリファレンスを使用して、柔軟性を持たせることが推奨される。
 
 ### 3. エラー内容を修正し再度テストを施行
+
 ---
-+ [cloudformationテンプレート](/cloudformation/)内の当該箇所を修正し再テストする。
+
+- [cloudformationテンプレート](/cloudformation/)内の当該箇所を修正し再テストする。
    ![success](images12/success.png)
-+ 成功を確認。
+- 成功を確認。
