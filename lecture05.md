@@ -196,7 +196,8 @@ $ bin/dev
 ```
 
 - アプリケーションの起動
-![Alt text](imases05/0502.png)
+  
+  ![Alt text](imases05/0502.png)
 - セキュリティグループにポート3000を追加
 ![Alt text](imases05/0503.png)
 - http://自分のパブリックIPアドレス:3000で稼働確認
