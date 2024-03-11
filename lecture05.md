@@ -205,6 +205,8 @@ $ bin/dev
 
 ## 2.Nginx+Unicornで起動
 
+### ポート80を追加
+
 ### Nginxのインストール
 
 ```sh
@@ -233,16 +235,92 @@ $ sudo systemctl status nginx.service
 - 接続画面
 ![スクリーンショット 2023-11-30 184641](https://github.com/murari-mura03/RaizeTech/assets/150114064/9d26440b-b78b-4413-b17e-27029ed545ef)
 
-- nginx/conf.dの変更
-- Unicornの設定
-- Unicorn の起動・停止スクリプトを作成する(なくてもいい)
-- セキュリティグループにポート80を追加
+### Unicornの起動
+
+```sh
+# Unicornの起動
+$ bundle exec unicorn -c config/unicorn.rb
+# 起動確認
+$ps -ef | grep unicorn | grep -v grep
+```
+
+### nginxの設定変更
+
+```json
+upstream unicorn {
+    server  unix:/home/ec2-user/raisetech-live8-sample-app/unicorn.sock;
+}
+
+server {
+    listen       80;
+    server_name  パブリックIPアドレス;
+
+    access_log  /var/log/nginx/access.log;
+    error_log   /var/log/nginx/error.log;
+
+    root /home/ec2-user/raisetech-live8-sample-app/public;
+
+    client_max_body_size 100m;
+    error_page  404              /404.html;
+    error_page  500 502 503 504  /500.html;
+    try_files   $uri/index.html $uri @unicorn;
+
+    location @unicorn {
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_pass http://unicorn;
+    }
+}
+```
+
+### 502 Bad Gateway
+
+```sh
+$ tail -n 5 /var/log/nginx/error.log
+*27 stat() "/home/ec2-user/raisetech-live8-sample-app/public/" failed (13: Permission denied)
+*27 connect() to unix:/home/ec2-user/raisetech-live8-sample-app/unicorn.sock failed (13: Permission denied)
+```
+
+- エラーログより(13: Permission denied)と表示があり、権限が足りていないことが分かる。
+
+```sh
+# /home/ec2-user/raisetech-live8-sample-app ディレクトリとそのサブディレクトリ、ファイルが ec2-user:ec2-user の所有者であることを確認。
+$ sudo chown -R ec2-user:ec2-user /home/ec2-user/raisetech-live8-sample-app
+# 同様に、ディレクトリとファイルが適切な権限を持っているか確認する。
+$ find /home/ec2-user/raisetech-live8-sample-app -type d -exec chmod 755 {} \;
+$ find /home/ec2-user/raisetech-live8-sample-app -type f -exec chmod 644 {} \;
+#再起動
+$ kill -9 xxxxx
+$ bundle exec unicorn -c config/unicorn.rb
+$ sudo systemctl restart nginx
+```
+
+- NginxとUnicornで起動確認。
 ![スクリーンショット 2023-12-06 154732](https://github.com/murari-mura03/RaizeTech/assets/150114064/b4af90f8-5180-48d6-81ec-e53eb36c9e34)
+
+参考
+
+- [【Rails】 AWSのEC2にデプロイする方法~画像で丁寧に解説！](https://pikawaka.com/rails/ec2_deploy)
+- [Rails開発におけるwebサーバーとアプリケーションサーバーの違い（翻訳）](https://qiita.com/jnchito/items/3884f9a2ccc057f8f3a3) #Qiita @jnchitoより 
+- [AWS & Nginx & Unicorn & Ruby on Rails](https://hackmd.io/@z6b3_Eq5SKu_7fFSamBfaw/HkMXbpJVD)
+- [【CentOS 7】Nginx + Unicorn で Rails アプリケーションを本番環境で立ち上げる方法｜Kosuke Aoki](https://zenn.dev/noraworld/articles/deploy-rails-application-with-nginx-and-unicorn) #zenn 
+- [Nginxの設定で詰まった話](https://qiita.com/koinunopochi/items/38481f0f8f77c5f8836a) #Qiita @a1a2a3b1b2b3b4より 
+- [Unicornを再起動する](https://qiita.com/vinaka/items/90a31d23297b9a1cd65d) #Qiita @pandapukinより
 
 ## 3.ロードバランサーの設置
 
 - EC2ダッシュボードより作成
 - config/environments/development.rbに追記
+
+```sh
+Rails.application.configure do
+（中略）
+  config.hosts << "lecture05-73515015.ap-northeast-1.elb.amazonaws.com"
+（中略）
+end
+```
+
 - DNS名で接続確認
 ![スクリーンショット 2023-12-08 175152](https://github.com/murari-mura03/RaizeTech/assets/150114064/bcbc072f-f059-444d-9a59-43a316d4bd21)
 ![スクリーンショット 2023-12-06 210923](https://github.com/murari-mura03/RaizeTech/assets/150114064/2a334da1-5f3a-41b3-bf85-24fe71444bd2)
