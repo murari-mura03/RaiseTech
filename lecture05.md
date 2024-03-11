@@ -35,6 +35,7 @@ $ sudo yum install git bzip2 readline-devel zlib-devel gcc libyaml-devel libffi-
 > - Amazon Linux 2ではamzn2-core、および amzn2extra-dockerが有効になっている。
 
 参考
+
 - [パッケージ管理 入門（Redhat系）](https://envader.plus/course/11/scenario/1122#Linux%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%AE%E6%A6%82%E5%BF%B5)
 - [yumコマンドでパッケージ管理](https://www.wakuwakubank.com/posts/275-linux-yum/ )
 
@@ -194,9 +195,12 @@ $ bin/setup
 $ bin/dev
 ```
 
+- アプリケーションの起動
+![Alt text](imases05/0502.png)
 - セキュリティグループにポート3000を追加
-- http://自分のEIPアドレス:3000で稼働確認
-![スクリーンショット 2023-11-30 153834](https://github.com/murari-mura03/RaizeTech/assets/150114064/03653871-fd80-4849-99d1-8d9f68d29de3)
+![Alt text](imases05/0503.png)
+- http://自分のパブリックIPアドレス:3000で稼働確認
+![Alt text](imases05/0501.png)
 
 参考
 
@@ -233,7 +237,7 @@ $ sudo systemctl status nginx.service
 ```
 
 - 接続画面
-![スクリーンショット 2023-11-30 184641](https://github.com/murari-mura03/RaizeTech/assets/150114064/9d26440b-b78b-4413-b17e-27029ed545ef)
+![Alt text](imases05/0504.png)
 
 ### Unicornの起動
 
@@ -244,9 +248,11 @@ $ bundle exec unicorn -c config/unicorn.rb
 $ps -ef | grep unicorn | grep -v grep
 ```
 
+![Alt text](imases05/0505.png)
+
 ### nginxの設定変更
 
-```json
+```sh
 upstream unicorn {
     server  unix:/home/ec2-user/raisetech-live8-sample-app/unicorn.sock;
 }
@@ -276,6 +282,9 @@ server {
 
 ### 502 Bad Gateway
 
+![Alt text](imases05/0506.png)
+
+- エラーログを確認する
 ```sh
 $ tail -n 5 /var/log/nginx/error.log
 *27 stat() "/home/ec2-user/raisetech-live8-sample-app/public/" failed (13: Permission denied)
@@ -297,7 +306,7 @@ $ sudo systemctl restart nginx
 ```
 
 - NginxとUnicornで起動確認。
-![スクリーンショット 2023-12-06 154732](https://github.com/murari-mura03/RaizeTech/assets/150114064/b4af90f8-5180-48d6-81ec-e53eb36c9e34)
+![Alt text](imases05/0508.png)
 
 参考
 
@@ -322,15 +331,16 @@ end
 ```
 
 - DNS名で接続確認
-![スクリーンショット 2023-12-08 175152](https://github.com/murari-mura03/RaizeTech/assets/150114064/bcbc072f-f059-444d-9a59-43a316d4bd21)
-![スクリーンショット 2023-12-06 210923](https://github.com/murari-mura03/RaizeTech/assets/150114064/2a334da1-5f3a-41b3-bf85-24fe71444bd2)
+![Alt text](imases05/0509.png)
+![Alt text](imases05/0510.png)
 
 ## 4.S3の設置
+
 - IAMロールを作成
 - EC2インスタンスにアタッチ
 - インスタンスを再起動
 - NginxとUnicornを起動
-![スクリーンショット 2023-12-08 173024](https://github.com/murari-mura03/RaizeTech/assets/150114064/c6e90365-f7e5-4bac-85bc-cf82ac049041)
+![Alt text](imases05/0511.png)
 S3へ画像のアップロードを確認
 
 ## 5.構成図作成
