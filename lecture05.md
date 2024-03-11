@@ -238,7 +238,8 @@ $ sudo systemctl status nginx.service
 ```
 
 - 接続画面
-![Alt text](imases05/0504.png)
+  
+  ![Alt text](imases05/0504.png)
 
 ### Unicornの起動
 
