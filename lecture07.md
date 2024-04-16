@@ -44,27 +44,34 @@
    3. 事後分析とフィードバックループ  
       インシデント発生後の分析とフィードバックは、将来的なセキュリティ向上に役立つ
 
+参考
+
+- [すぐに始めて、継続できる AWS のセキュリティ対策](https://aws.amazon.com/jp/builders-flash/202302/continuous-security/) #AWSウェブマガジン
+
 ### AWSのセキュリティ強化サービス
 
 #### 予防的統制に寄与するサービス
 
 1. AWS IAM (Identity and Access Management)  
-   AWSリソースへのアクセス管理を行う。ユーザーやグループ、ロールを作成し、これらに対して細かいアクセス権限を設定することで、不正アクセスや権限の乱用を防ぐ。
+   - AWSリソースへのアクセス管理を行う。ユーザーやグループ、ロールを作成し、これらに対して細かいアクセス権限を設定することで、不正アクセスや権限の乱用を防ぐ。
+
 2. AWS Shield  
-   DDoS攻撃からAWSリソースを保護するサービス。
+   - DDoS攻撃からAWSリソースを保護するサービス。
+
 3. AWS WAF (Web Application Firewall)  
-   ウェブアプリケーションを保護するためのファイアウォールサービス。SQLインジェクションやクロスサイトスクリプティングなどの一般的なウェブ攻撃を防ぐ。
+   - ウェブアプリケーションを保護するためのファイアウォールサービス。SQLインジェクションやクロスサイトスクリプティングなどの一般的なウェブ攻撃を防ぐ。
 
 #### 予防的統制と発見的統制両方に寄与するサービス
 
 1. AWS CloudTrail
+   - AWSアカウント内のAPI呼び出し履歴を記録し、セキュリティイベントの追跡と分析を行う
 2. AWS Config
-3. Amazon Detective
-4. Amazon GuardDuty
-5. Amazon Inspector
-6. Amazon OpenSearch Service
-7. AWS Security Hub
-8. VPC Flow Logs
+   - AWSリソースの設定変更を継続的に監視、記録し、セキュリティとコンプライアンスのガイドラインに基づいて評価するサービス
+3. Amazon GuardDuty
+   -AWSアカウント、ワークロード、データを保護する脅威検知サービス
+4. Amazon Inspector
+   - AWS上で動作するアプリケーションのセキュリティ脆弱性を自動的に検出し、対策を提案するサービス
+5. Amazon OpenSearch Service
 
 参考  
 
