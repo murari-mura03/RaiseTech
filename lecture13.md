@@ -61,7 +61,7 @@ ansible 2.9.23
 
 ## 疎通確認
 
-- キセキュリティの観点からーペアファイルの権限を変更
+- キセキュリティの観点からキーペアファイルの権限を変更
 - `chmod 400 terraform_keypair.pem`
 - インベントリファイルの作成
   
@@ -111,6 +111,7 @@ lecture13-ec2 | SUCCESS => {
 ## hostsファイルの変更
 
 `sudo vim /etc/ansible/hosts`
+
 ![Alt text](images13/1303.jpg)
 
 ## playbookの作成
