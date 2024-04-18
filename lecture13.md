@@ -49,7 +49,7 @@ https://github.com/murari-mura03/lecture13
 ## Ansibleインストール
 
 - EC2-masterへSSH接続
-- `vim terraform_keypair.pem`でキーペア情報を登録する
+- `terraform_keypair.pem`でキーペア情報を登録する
   (teratarmに.pemファイルをドロップするだけで登録できる)
 - `sudo amazon-linux-extras install ansible2` Ansibleをインストール
 - バージョン確認
