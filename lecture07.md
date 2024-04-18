@@ -6,7 +6,11 @@
      - どのような対策が取れるか？
 ```
 
+## 感想と対策
 
+- リスク対策はどこまでを受容しどこまでを対策するのか考えて立案しないと、あまり範囲が広すぎても狭すぎても情報を守れないと感じる。
+- 自分が作っている環境では、ACMを使用しSSL/TLS証明書を発行することで通信プロトコルをhttpからhttpsへ変更したり、AWS ShieldやAWS WAFを有効化し外部からの攻撃を検知、ブロックを追加する必要がある。
+- AWS CloudTrailを設定し、「誰が、いつ、何に対して、何をしたか」ということを記録しておくことで不正利用などを防いでいく。
 
 ## 以下AWSのセキュリティ対策をまとめたもの
 
@@ -76,7 +80,8 @@
    - AWSリソースの設定変更を継続的に監視、記録し、セキュリティとコンプライアンスのガイドラインに基づいて評価するサービス
 
 3. Amazon GuardDuty
-   -AWSアカウント、ワークロード、データを保護する脅威検知サービス
+   - AWSアカウント、ワークロード、データを保護する脅威検知サービス。
+   - AWS 内のイベントをチェックし、セキュリティインシデントの疑いがあるイベントについて指摘してくれる。
 
 4. Amazon Inspector
    - AWS上で動作するアプリケーションのセキュリティ脆弱性を自動的に検出し、対策を提案するサービス
@@ -86,3 +91,4 @@
 - [AWSのセキュリティ対策の基本とベストプラクティス](https://cloudnavi.nhn-techorus.com/archives/5104)
 - [2021年版AWSセキュリティ対策全部盛り初級から上級まで というタイトルでDevelopersIO 2021 Decadeに登壇しました #devio2021](https://dev.classmethod.jp/articles/aws-security-all-in-one-2021/)
 - [愛してやまないAWSで展開するセキュリティ対策戦略](https://zenn.dev/levtech/articles/security-strategy-in-aws)
+- [AWS CloudTrailログのセキュリティモニタリング入門：クラウドセキュリティモニタリングのベストプラクティス](https://atmarkit.itmedia.co.jp/ait/articles/2304/19/news015.html)
