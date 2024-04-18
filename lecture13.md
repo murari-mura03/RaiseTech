@@ -43,6 +43,7 @@ https://github.com/murari-mura03/lecture13
 
 ## Ansible導入手順
 
+- 以下は別環境をTerraformで環境構築しAnsibleのテストを行ったもの
 - Ansible初回使用時手間取ったこともあり以下導入の手順を記載しておく
 - 同AZ上にEC2を2台設置しEC2-master(Master)からlecture13-ec2(Target)へnginxのインストールを行う
 
@@ -50,7 +51,7 @@ https://github.com/murari-mura03/lecture13
 
 - EC2-masterへSSH接続
 - `vim terraform_keypair.pem`でキーペア情報を登録する
-  (teratarmに.pemファイルをドロップするだけで登録できる)
+  (teratermに.pemファイルをドロップするだけで登録できる)
 - `sudo amazon-linux-extras install ansible2` Ansibleをインストール
 - バージョン確認
 
