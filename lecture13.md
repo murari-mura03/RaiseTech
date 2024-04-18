@@ -49,7 +49,7 @@ https://github.com/murari-mura03/lecture13
 ## Ansibleインストール
 
 - EC2-masterへSSH接続
-- `terraform_keypair.pem`でキーペア情報を登録する
+- `vim terraform_keypair.pem`でキーペア情報を登録する
   (teratarmに.pemファイルをドロップするだけで登録できる)
 - `sudo amazon-linux-extras install ansible2` Ansibleをインストール
 - バージョン確認
@@ -211,4 +211,4 @@ PLAY RECAP *********************************************************************
 175.41.201.255             : ok=5    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 
-  ![Alt text](images13/1302.jpg)
+![Alt text](images13/1302.jpg)
