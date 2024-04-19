@@ -4,11 +4,12 @@ Description: Network_Layer Template
 Parameters:
   FirstAvailabilityZone:
     Type: AWS::EC2::AvailabilityZone::Name
-    Description: "Specify the first availability zone for the network resources"
+    Default: ap-northeast-1a
+    
   SecondAvailabilityZone:
     Type: AWS::EC2::AvailabilityZone::Name
-    Description: "Specify the second availability zone for the network resources"
-
+    Default: ap-northeast-1c
+    
 Resources:
   Lecture10Vpc:
     Type: AWS::EC2::VPC

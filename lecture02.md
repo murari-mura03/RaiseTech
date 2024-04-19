@@ -103,6 +103,7 @@ cd ???
 ![Alt text](images02/0211.png)
 
 #### 2. 作業用ブランチの作成と現在ブランチの切替(checkout)
+
 - `lecture02`という作業用ブランチを作成し`main`から`lecture02`へ移動する。
 - touchコマンドで`lecture02`ブランチに`lecture02.md`ファイルを作成し、変更を加える。
 
