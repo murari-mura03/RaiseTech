@@ -42,8 +42,8 @@
 | 第2回  | Gitの基礎知識<br>GitHubアカウントの作成                                                                   | [lecture02.md](lecture02.md)                                                            |         |
 | 第3回  | Cloud9でサンプルアプリケーションをデプロイ                                                                | [lecture03.md](lecture03.md)                                                            |         |
 | 第4回  | VPC・EC2・RDSの作成、EC2からRDSへ接続                                                                     | [lecture04.md](lecture04.md)                                                            |         |
-| 第5回  | 第4回で作成したリソースを使用してRailsサンプルアプリケーションをデプロイ<br>ALB、S3を追加して構成図を作成 | [lecture05.md](lecture05.md)                                                            |         |
-| 第6回  | システムの安定稼働<br>CloudTrail<br>CloudWatch<br>Amazon SNS<br>メトリクス<br>Cost Explorer<br>Billing    | [lecture06.md](lecture06.md)                                                            |         |
+| 第5回  | 第4回で作成したAWSリソースを使用しサンプルアプリケーションをデプロイ<br>ALB、S3を追加して構成図を作成 | [lecture05.md](lecture05.md)                                                            |         |
+| 第6回  | システムの安定稼働<br>- CloudTrail<br>- CloudWatch<br>- Amazon SNS<br>メトリクス<br>- Cost Explorer<br>Billing    | [lecture06.md](lecture06.md)                                                            |         |
 | 第7回  | システムにおけるセキュリティの基礎<br>AWSでのセキュリティ対策<br>作成中の環境の脆弱性と対策の考察         | [lecture07.md](lecture07.md)                                                            |         |
 | 第8回  | 第5回課題のライブコーディング①                                                                            | なし                                                                                    |         |
 | 第9回  | 第5回課題のライブコーディング②                                                                            | なし                                                                                    |         |
