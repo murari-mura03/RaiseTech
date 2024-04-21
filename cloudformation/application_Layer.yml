@@ -16,8 +16,6 @@ Parameters:
       - db.t2.micro
       - db.t2.small
       - db.t2.medium
-# DBInstanceIdentifier,DBSubnetGroupDescription,S3BucketName
-# 元々type:Stringのため記述不必要と判断し削除いたしました。
 
 # EC2
 Resources:

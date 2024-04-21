@@ -196,12 +196,13 @@ $ bin/dev
 ```
 
 - アプリケーションの起動
-  
-  ![Alt text](imases05/0502.png)
+![Alt text](images05/0502.png)
+
 - セキュリティグループにポート3000を追加
-![Alt text](imases05/0503.png)
+![Alt text](images05/0503.png)
+
 - http://自分のパブリックIPアドレス:3000で稼働確認
-![Alt text](imases05/0501.png)
+![Alt text](images05/0501.png)
 
 参考
 
@@ -239,7 +240,7 @@ $ sudo systemctl status nginx.service
 
 - 接続画面
   
-  ![Alt text](imases05/0504.png)
+  ![Alt text](images05/0504.png)
 
 ### Unicornの起動
 
@@ -250,7 +251,7 @@ $ bundle exec unicorn -c config/unicorn.rb
 $ps -ef | grep unicorn | grep -v grep
 ```
 
-![Alt text](imases05/0505.png)
+![Alt text](images05/0505.png)
 
 ### nginxの設定変更
 
@@ -284,7 +285,7 @@ server {
 
 ### 502 Bad Gateway
 
-![Alt text](imases05/0506.png)
+![Alt text](images05/0506.png)
 
 - エラーログを確認する
 ```sh
@@ -308,7 +309,7 @@ $ sudo systemctl restart nginx
 ```
 
 - NginxとUnicornで起動確認。
-![Alt text](imases05/0508.png)
+![Alt text](images05/0508.png)
 
 参考
 
@@ -333,8 +334,8 @@ end
 ```
 
 - DNS名で接続確認
-![Alt text](imases05/0509.png)
-![Alt text](imases05/0510.png)
+![Alt text](images05/0509.png)
+![Alt text](images05/0510.png)
 
 ## 4.S3の設置
 
