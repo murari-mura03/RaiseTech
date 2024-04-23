@@ -4,6 +4,10 @@
 
 ![Alt text](terraform_images/Terraform.jpg)
 
+## 実際のコード
+
+[terraform](terraform)
+
 ## 概要
 
 ### 1.terraform applyを実行することでAWS上にリソースの作成
