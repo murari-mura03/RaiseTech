@@ -10,12 +10,12 @@
 
 ## ディレクトリ構成
 
-```sh
+```text
 terraform
 ├─ main.tf
 ├─ terraform.tfvars
 ├─ variable.tf
-└─ modules
+├─ modules
 |   ├─ec2  
 |   ├─iam  
 |   ├─lb   
