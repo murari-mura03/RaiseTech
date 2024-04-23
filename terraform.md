@@ -16,17 +16,17 @@
 
 ### 各リソース作成画面
 1. VPC
-![Alt text](terraform/terraVPC.png)
+![Alt text](terraform_images/terraVPC.png)
 2. EC2 2台
-![Alt text](terraform/terraEC2.png)
+![Alt text](terraform_images/terraEC2.png)
 3. RDS
-![Alt text](terraform/terraRDS.png)
+![Alt text](terraform_images/terraRDS.png)
 4. S3
-![Alt text](terraform/terraS3.png)
+![Alt text](terraform_images/terraS3.png)
 5. コントロールノードへAnsibleのインストール
-![Alt text](terraform/ansible-v.png)
+![Alt text](terraform_images/ansible-v.png)
 6. ターゲットノードへの疎通確認
-![Alt text](terraform/terraAnsible.png)
+![Alt text](terraform_images/terraAnsible.png)
 
 ## terraform導入手順
 
@@ -45,7 +45,7 @@
 #プロバイダーの設定
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs
 provider "aws" {
-  region = "ap-northeast-1"
+  region = "ap-******-1"
   access_key = "*******"
   secret_key = "*******"
 }
