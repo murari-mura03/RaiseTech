@@ -23,16 +23,16 @@
 ![Alt text](terraform_images/terraRDS.png)
 4. S3
 ![Alt text](terraform_images/terraS3.png)
-5. コントロールノードへAnsibleのインストール
+5. コントロールノードへAnsibleのインストール  
 ![Alt text](terraform_images/ansible-v.png)
 6. ターゲットノードへの疎通確認
 ![Alt text](terraform_images/terraAnsible.png)
 
-## terraform導入手順
+## Terraform導入手順
 
 ### 事前準備
 
-1. [terraform公式サイト](https://developer.hashicorp.com/terraform/install?product_intent=terraform)からTerraformをDLする
+1. [Terraform公式サイト](https://developer.hashicorp.com/terraform/install?product_intent=terraform)からTerraformをDLする
 2. システム環境変数の編集よりpathを通しておく
    - システム環境変数:新規→.exeファイルのフルパスを指定→ターミナルで`terraform -v`でバージョンの確認を行う
 3. VScode:拡張機能`HashiCorp Terraform`をインストールしておく
