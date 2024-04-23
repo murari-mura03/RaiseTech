@@ -8,6 +8,24 @@
 
 [terraform](terraform)
 
+## ディレクトリ構成
+
+```sh
+terraform
+├─ main.tf
+├─ terraform.tfvars
+├─ variable.tf
+└─ modules
+|   ├─ec2  
+|   ├─iam  
+|   ├─lb   
+|   ├─network
+|   ├─rds  
+|   └─s3  
+├─ ansible_setup.yaml
+└─ inventory.txt
+```
+
 ## 概要
 
 ### 1.terraform applyを実行することでAWS上にリソースの作成
