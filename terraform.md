@@ -2,7 +2,7 @@
 
 ## 構成図
 
-![Alt text](Terraform.jpg)
+![Alt text](terraform_images/Terraform.jpg)
 
 ## 概要
 
