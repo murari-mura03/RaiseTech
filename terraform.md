@@ -8,6 +8,13 @@
 
 [terraform](terraform)
 
+## 検証環境
+
+動作確認はWindowsOS上で行いました。バージョンは次の通りです。
+
+- Terraform：>=1.7.4
+- AWSプロバイダ:~> 4.61.0
+
 ## ディレクトリ構成
 
 ```text
@@ -37,18 +44,19 @@ terraform
 - provisioner機能の"remote-exec"を使用しコントロールノード用に作成したEC2へAnsibleのインストール、ターゲットノード用に作成したEC2へコントロールノードからの疎通確認を行う
 
 ### 各リソース作成画面
+
 1. VPC
-![Alt text](terraform_images/terraVPC.png)
+![VPC](terraform_images/terraVPC.png)
 2. EC2 2台
-![Alt text](terraform_images/terraEC2.png)
+![EC2](terraform_images/terraEC2.png)
 3. RDS
-![Alt text](terraform_images/terraRDS.png)
+![RDS](terraform_images/terraRDS.png)
 4. S3
-![Alt text](terraform_images/terraS3.png)
+![S3](terraform_images/terraS3.png)
 5. コントロールノードへAnsibleのインストール  
-![Alt text](terraform_images/ansible-v.png)
+![Ansible](terraform_images/ansible-v.png)
 6. ターゲットノードへの疎通確認
-![Alt text](terraform_images/terraAnsible.png)
+![TARGET‗HOST](terraform_images/terraAnsible.png)
 
 ## Terraform導入手順
 
@@ -62,7 +70,7 @@ terraform
 
 ### .tfファイルの作成
 
-```sh
+```hcl
 # Configure the AWS Provider
 #プロバイダーの設定
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs
@@ -74,7 +82,7 @@ provider "aws" {
 
 # 上記で設定したプロバイダーに対してどういうリソースを作りたいのか記述
 # Terraform Registryを確認しながら記載していく
-#https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance
 resource "<provider>_<resource_type>" "name" {
   key1 = "value1"
   key2 = "value2"
@@ -92,7 +100,7 @@ AWSコンソールのセキュリティ認証情報→アクセスキーの作�
 #### terraform init
 
 - ワークスペースを初期化するコマンド。
-- Terraform を実行するためには、まず`terraform init` でワークスペースの初期化が必要。
+- Terraform を実行するためには、まず`terraform init`でワークスペースの初期化が必要。
 - .tf（テンプレート）ファイル内の plugin（aws provider など）のダウンロード処理などが走る。
 - モジュールでリソースを追加変更時、バックエンドの設定を変更した場合などその都度実行する。
 
@@ -109,9 +117,9 @@ AWSコンソールのセキュリティ認証情報→アクセスキーの作�
 #### terraform apply
 
 - .tf（テンプレート）ファイルに記載された情報を元にリソースを作成するコマンド。
-- リソースが作成後、 terraform.tfstate に、作成されたリソースに関連する情報が保存される。
-- 2度目以降の実行後には、1世代前のものが terraform.tfstate.backup に保存される。
-- Terraform において、この状態を管理する terraform.state ファイルが非常に重要となるため、手動更新等は行わないこと。
+- リソースが作成後、 `terraform.tfstate` に、作成されたリソースに関連する情報が保存される。
+- 2度目以降の実行後には、1世代前のものが `terraform.tfstate.backup` に保存される。
+- Terraform において、この状態を管理する `terraform.state` ファイルが非常に重要となるため、手動更新等は行わないこと。
 
 #### terraform destroy
 

@@ -5,7 +5,7 @@
 
 ## 1.使用ツール
 
-```sh
+```text
 1.CircleCI
 - Cloudformation、Ansible、serverspecの実行
 
@@ -27,7 +27,7 @@
 
 ## 2.構成図
 
-![Alt text](images13/1301.jpg)
+![1301](images13/1301.jpg)
 
 ## 3.完成したコードは[こちらのリポジトリ](https://github.com/murari-mura03/lecture13)となります。
 
