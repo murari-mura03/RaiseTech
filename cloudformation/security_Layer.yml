@@ -50,7 +50,6 @@ Resources:
           Value: SecurityGroupALB
       VpcId: !ImportValue Lecture10VpcId
   
-  # セキュリティ面を考慮しIAMロール,SecretManagetの設定をApplicationLayerから移動しました。
   #IAMロール
   EC2InstanceRole:
     Type: "AWS::IAM::Role"
@@ -84,7 +83,6 @@ Resources:
         PasswordLength: 16
         ExcludeCharacters: '"@/\'
 
-# 出力内容を確認し、中身が分かりやすいよう名称を変更しました。
 Outputs:
   Lecture10Sg:
     Value: !Ref Lecture10Sg

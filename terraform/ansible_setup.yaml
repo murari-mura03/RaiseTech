@@ -1,0 +1,10 @@
+---
+- name: Configure EC2 instances
+  hosts: lecture13-ec2
+  gather_facts: no
+  become: yes
+  become_user: ec2-user
+  tasks:
+    - name: Example task
+      debug:
+        msg: "This task is executed on EC2 instance"
